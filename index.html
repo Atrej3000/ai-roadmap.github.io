@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenAI Certificate Roadmap 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090e;--surf:#111118;--card:#14141c;--brd:#252530;--brd2:#3a3a4a;--text:#e2e2ee;--muted:#5c5c72;--dim:#3a3a50;--t1:#c8ff47;--t2:#47c8ff;--t3:#ffd447;--red:#ff6060;--green:#47ff9c;--orange:#ff9447;--mono:'JetBrains Mono',monospace;--sans:'Syne',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,255,71,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(200,255,71,.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+#app-header{padding:40px 0 24px;border-bottom:1px solid var(--brd)}
+.hdr-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hdr-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--t1);border:1px solid rgba(200,255,71,.35);padding:3px 10px;margin-bottom:12px}
+h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.025em}
+h1 em{color:var(--t1);font-style:normal}
+.hdr-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start;padding-top:4px}
+.btn{font-family:var(--sans);font-size:11.5px;font-weight:700;padding:7px 13px;border:1px solid var(--brd2);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;border-radius:2px}
+.btn:hover{color:var(--text);border-color:var(--text)}
+.btn.primary{border-color:var(--t1);color:var(--t1)}.btn.primary:hover{background:rgba(200,255,71,.08)}
+.progress-bar-wrap{margin-top:16px}
+.progress-bar-track{height:3px;background:var(--brd);border-radius:2px;overflow:hidden;margin-top:6px}
+.progress-bar-fill{height:100%;background:var(--t1);transition:width .4s ease;border-radius:2px}
+.progress-label{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.progress-label strong{color:var(--t1)}
+#ai-toolbar{display:flex;gap:8px;padding:14px 0;border-bottom:1px solid var(--brd);flex-wrap:wrap}
+.ai-btn{font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:6px 12px;border:1px solid var(--brd2);background:var(--card);color:var(--muted);cursor:pointer;transition:all .2s;border-radius:2px;display:flex;align-items:center;gap:6px}
+.ai-btn:hover{color:var(--text);border-color:var(--dim)}
+.ai-btn .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+#filter-bar{padding:16px 0;border-bottom:1px solid var(--brd);position:sticky;top:0;background:rgba(9,9,14,.96);backdrop-filter:blur(8px);z-index:10}
+.filter-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.filter-row:last-child{margin-bottom:0}
+.filter-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);width:48px;flex-shrink:0}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:10px;padding:4px 10px;border:1px solid var(--brd);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;border-radius:2px}
+.chip:hover{color:var(--text);border-color:var(--dim)}
+.chip.active{border-color:var(--t1);color:#000;background:var(--t1);font-weight:500}
+.chip.active.t2{border-color:var(--t2);color:#000;background:var(--t2)}
+.chip.active.t3{border-color:var(--t3);color:#000;background:var(--t3)}
+.chip.active.topic{border-color:var(--t2);color:var(--t2);background:rgba(71,200,255,.08)}
+.chip.active.role{border-color:var(--orange);color:var(--orange);background:rgba(255,148,71,.08)}
+.range-wrap{display:flex;align-items:center;gap:10px;flex:1;min-width:180px}
+.range-wrap input[type=range]{flex:1;accent-color:var(--t1)}
+.range-val{font-family:var(--mono);font-size:11px;color:var(--t2);white-space:nowrap;min-width:70px}
+.search-input{background:var(--card);border:1px solid var(--brd);color:var(--text);font-family:var(--sans);font-size:12px;padding:6px 12px;border-radius:2px;width:220px;outline:none}
+.search-input::placeholder{color:var(--muted)}
+#stats-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;font-family:var(--mono);font-size:11px;color:var(--muted);border-bottom:1px solid var(--brd)}
+#stats-bar strong{color:var(--text)}
+#course-grid{padding:20px 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--brd);position:relative;overflow:hidden;transition:border-color .2s,transform .2s;border-radius:2px}
+.card:hover{border-color:var(--brd2);transform:translateY(-1px)}
+.card.done{border-color:rgba(200,255,71,.2);background:#14181a}
+.card.highlighted{border-color:var(--t2);box-shadow:0 0 0 1px rgba(71,200,255,.2)}
+.card.flagged{border-color:rgba(255,96,96,.3)}
+.card-top{height:2px;width:100%;transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.card:hover .card-top{transform:scaleX(1)}
+.card-body{padding:14px 16px}
+.card-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.card-check{width:18px;height:18px;border:1.5px solid var(--brd2);border-radius:3px;cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--t1);transition:all .2s;background:transparent;user-select:none}
+.card-check:hover{border-color:var(--t1)}
+.card.done .card-check{background:var(--t1);border-color:var(--t1);color:#000}
+.card-title{font-size:.875rem;font-weight:700;line-height:1.3;flex:1;color:var(--text)}
+.card.done .card-title{color:var(--muted)}
+.card-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.badge{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:1px;font-weight:500;border:1px solid}
+.b-t1{background:rgba(200,255,71,.08);color:var(--t1);border-color:rgba(200,255,71,.2)}
+.b-t2{background:rgba(71,200,255,.06);color:var(--t2);border-color:rgba(71,200,255,.15)}
+.b-t3{background:rgba(255,212,71,.07);color:var(--t3);border-color:rgba(255,212,71,.18)}
+.b-time{background:rgba(71,200,255,.06);color:var(--t2);border-color:rgba(71,200,255,.15)}
+.b-star{background:rgba(200,255,71,.1);color:var(--t1);border-color:rgba(200,255,71,.25)}
+.b-warn{background:rgba(255,96,96,.08);color:var(--red);border-color:rgba(255,96,96,.2)}
+.b-salary{background:rgba(255,148,71,.08);color:var(--orange);border-color:rgba(255,148,71,.2)}
+.card-topics{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.topic-pill{font-family:var(--mono);font-size:9px;padding:2px 7px;border:1px solid var(--brd);color:var(--muted);cursor:pointer;transition:all .15s;border-radius:10px}
+.topic-pill:hover{border-color:var(--t2);color:var(--t2)}
+.card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--brd)}
+.card-verified{font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+.card-actions{display:flex;gap:6px}
+.card-link{font-family:var(--mono);font-size:9px;color:var(--muted);text-decoration:none;padding:3px 8px;border:1px solid var(--brd);transition:all .15s;border-radius:1px}
+.card-link:hover{color:var(--t1);border-color:var(--t1)}
+.tip-btn{font-family:var(--mono);font-size:9px;color:var(--muted);padding:3px 8px;border:1px solid var(--brd);cursor:pointer;transition:all .15s;background:transparent;border-radius:1px}
+.tip-btn:hover{color:var(--t2);border-color:var(--t2)}
+.next-steps{background:rgba(200,255,71,.04);border:1px solid rgba(200,255,71,.12);padding:8px 12px;margin-top:8px}
+.next-steps-label{font-family:var(--mono);font-size:9px;color:var(--t1);text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+.next-link{display:inline-block;color:var(--text);text-decoration:none;font-size:11.5px;font-weight:700;margin-right:8px;margin-bottom:3px}
+.next-link:hover{color:var(--t1)}.next-link::after{content:' ->';color:var(--t1)}
+.diff-badge{font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:1px;border:1px solid}
+.diff-none{color:#47ff9c;border-color:rgba(71,255,156,.2);background:rgba(71,255,156,.05)}
+.diff-python{color:var(--t2);border-color:rgba(71,200,255,.2);background:rgba(71,200,255,.05)}
+.diff-ml{color:var(--orange);border-color:rgba(255,148,71,.2);background:rgba(255,148,71,.05)}
+.diff-cloud{color:#c47aff;border-color:rgba(196,122,255,.2);background:rgba(196,122,255,.05)}
+.provider-name{font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-bottom:4px}
+.tier-head{display:flex;align-items:center;gap:12px;padding:24px 0 14px;border-top:1px solid var(--brd);margin-top:8px;grid-column:1/-1}
+.tier-head-bar{width:4px;height:32px;border-radius:2px;flex-shrink:0}
+.tier-head-title{font-size:1.2rem;font-weight:800;letter-spacing:-.015em}
+.tier-head-sub{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px}
+.tier-head-count{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--brd);padding:2px 8px}
+#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:none;backdrop-filter:blur(4px)}
+#modal-overlay.open{display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:var(--surf);border:1px solid var(--brd2);width:100%;max-width:640px;max-height:90vh;overflow-y:auto;border-radius:2px}
+.modal.wide{max-width:820px}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--surf);z-index:1}
+.modal-title{font-size:1rem;font-weight:700}
+.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;line-height:1}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:22px}
+.modal-body p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.modal-section{margin-bottom:20px}
+.modal-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.modal-textarea{width:100%;background:var(--card);border:1px solid var(--brd);color:var(--text);font-family:var(--mono);font-size:11.5px;padding:10px 12px;resize:vertical;border-radius:2px;outline:none;min-height:120px}
+.modal-textarea::placeholder{color:var(--muted)}
+.modal-input{width:100%;background:var(--card);border:1px solid var(--brd);color:var(--text);font-family:var(--sans);font-size:13px;padding:8px 12px;border-radius:2px;outline:none}
+.modal-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-footer{padding:16px 22px;border-top:1px solid var(--brd);display:flex;gap:10px;justify-content:flex-end}
+.btn-modal{font-family:var(--sans);font-size:12px;font-weight:700;padding:8px 18px;border-radius:2px;cursor:pointer;border:1px solid}
+.btn-modal.go{background:var(--t1);border-color:var(--t1);color:#000}
+.btn-modal.go:hover{background:#d4ff5c}
+.btn-modal.go:disabled{opacity:.4;cursor:not-allowed}
+.btn-modal.cancel{background:transparent;border-color:var(--brd2);color:var(--muted)}
+.btn-modal.cancel:hover{color:var(--text)}
+.ai-result{background:var(--card);border:1px solid var(--brd);padding:14px 16px;margin-top:12px;font-size:12.5px;color:var(--text);line-height:1.6;border-radius:2px;max-height:320px;overflow-y:auto}
+.ai-result.loading{color:var(--muted);font-family:var(--mono);font-size:11px}
+.result-item{padding:10px 0;border-bottom:1px solid var(--brd)}
+.result-item:last-child{border-bottom:none}
+.result-title{font-weight:700;font-size:13px;margin-bottom:3px}
+.result-reason{font-size:12px;color:var(--muted);line-height:1.5}
+.result-badge{display:inline-block;font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:1px;margin-right:6px;border:1px solid}
+.r-high{color:#47ff9c;border-color:rgba(71,255,156,.3);background:rgba(71,255,156,.07)}
+.r-med{color:var(--t2);border-color:rgba(71,200,255,.3);background:rgba(71,200,255,.07)}
+.r-low{color:var(--muted);border-color:var(--brd);background:transparent}
+.dt-step{display:none}.dt-step.active{display:block}
+.dt-q{font-size:1.05rem;font-weight:700;margin-bottom:18px}
+.dt-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dt-opt{background:var(--card);border:1px solid var(--brd);padding:12px 14px;cursor:pointer;transition:all .2s;font-size:13px;font-weight:600;border-radius:2px}
+.dt-opt:hover{border-color:var(--t1);color:var(--t1)}
+.dt-opt.selected{border-color:var(--t1);background:rgba(200,255,71,.08);color:var(--t1)}
+.dt-back{font-family:var(--mono);font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;margin-top:16px}
+.dt-back:hover{color:var(--text)}
+.dt-results{display:grid;gap:8px}
+.dt-rec{background:var(--card);border:1px solid var(--brd);padding:12px 14px;border-radius:2px}
+.dt-rec-num{font-family:var(--mono);font-size:9px;color:var(--t1);margin-bottom:3px}
+.dt-rec-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.dt-rec-reason{font-size:11.5px;color:var(--muted);line-height:1.5}
+.dt-rec-link{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--t1);text-decoration:none;border-bottom:1px solid rgba(200,255,71,.3)}
+.dt-progress{display:flex;gap:8px;margin-bottom:20px}
+.dt-prog-dot{width:8px;height:8px;border-radius:50%;background:var(--brd2)}
+.dt-prog-dot.done{background:var(--t1)}.dt-prog-dot.active{background:var(--t1);box-shadow:0 0 0 3px rgba(200,255,71,.2)}
+.week-plan{margin-top:12px}
+.week-row{padding:10px 0;border-bottom:1px solid var(--brd)}.week-row:last-child{border-bottom:none}
+.week-label{font-family:var(--mono);font-size:10px;color:var(--t1);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em}
+.week-course{font-size:12px;color:var(--text);padding:3px 0}
+.week-course span{font-family:var(--mono);font-size:9px;color:var(--muted);margin-left:6px}
+.tip-example{background:var(--card);border:1px solid var(--brd);border-left:3px solid var(--t2);padding:10px 12px;margin-top:10px;font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--text)}
+.share-url{background:var(--card);border:1px solid var(--brd);padding:10px 12px;font-family:var(--mono);font-size:10px;color:var(--muted);word-break:break-all;margin:10px 0;border-radius:2px}
+.copy-feedback{font-family:var(--mono);font-size:11px;color:var(--t1);margin-top:8px;min-height:16px}
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state h3{font-size:1rem;margin-bottom:8px;color:var(--dim)}
+#shared-banner{background:rgba(71,200,255,.06);border:1px solid rgba(71,200,255,.2);border-radius:2px;padding:12px 16px;margin-bottom:16px;display:none;font-size:12.5px;align-items:center;gap:12px}
+#shared-banner.show{display:flex}
+#shared-banner strong{color:var(--t2)}
+@media print{body{background:#fff!important;color:#000!important}body::before,#ai-toolbar,#filter-bar,.hdr-actions,.card-check,.tip-btn{display:none!important}.card{border:1px solid #ccc!important;background:#fff!important;break-inside:avoid;transform:none!important}.card-title,.tier-head-title{color:#000!important}.badge,.topic-pill,.diff-badge{color:#444!important;border-color:#ccc!important;background:#f5f5f5!important}.next-steps{display:none}.hdr-tag{border-color:#ccc;color:#333}h1{color:#000!important}h1 em{color:#333!important}}
+@media(max-width:640px){#course-grid{grid-template-columns:1fr}.dt-opts{grid-template-columns:1fr}.modal-row{grid-template-columns:1fr}.range-wrap{min-width:140px}.hdr-top{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div id="shared-banner"><span>Loaded a <strong>shared roadmap</strong>.</span><button class="btn" onclick="saveSharedProgress()" style="margin-left:auto">Save as mine</button><button class="btn" onclick="document.getElementById('shared-banner').classList.remove('show')">Dismiss</button></div>
+<header id="app-header">
+  <div class="hdr-top">
+    <div><div class="hdr-tag">Complete 2026 Roadmap</div><h1>GenAI Certificates<br><em>All Three Tiers</em></h1></div>
+    <div class="hdr-actions">
+      <button class="btn primary" onclick="openModal('share')">Share Progress</button>
+      <button class="btn" onclick="window.print()">Print</button>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-label"><strong id="prog-count">0</strong> of <span id="prog-total">0</span> completed</div>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+</header>
+<div id="ai-toolbar">
+  <button class="ai-btn" onclick="openModal('decision-tree')"><div class="dot"></div>Find My Path</button>
+  <button class="ai-btn" onclick="openModal('study-plan')"><div class="dot"></div>Study Plan</button>
+  <button class="ai-btn" onclick="openModal('cv')" style="color:var(--t2)"><div class="dot" style="background:var(--t2)"></div>CV Matcher</button>
+  <button class="ai-btn" onclick="openModal('job')" style="color:var(--orange)"><div class="dot" style="background:var(--orange)"></div>Job Analyzer</button>
+  <button class="ai-btn" onclick="openModal('refresh')" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Verify Availability</button>
+</div>
+<div id="filter-bar">
+  <div class="filter-row"><span class="filter-label">Tier</span><div class="chips" id="tier-chips"><button class="chip active" data-tier="all">All</button><button class="chip t1" data-tier="1">1 Free+Badge</button><button class="chip t2" data-tier="2">2 Free Only</button><button class="chip t3" data-tier="3">3 Paid</button></div></div>
+  <div class="filter-row"><span class="filter-label">Role</span><div class="chips" id="role-chips"><button class="chip active role" data-role="all">All</button><button class="chip role" data-role="dev">Developer</button><button class="chip role" data-role="manager">Manager</button><button class="chip role" data-role="researcher">Researcher</button><button class="chip role" data-role="beginner">Beginner</button></div></div>
+  <div class="filter-row"><span class="filter-label">Topic</span><div class="chips" id="topic-chips"><button class="chip active topic" data-topic="all">All</button><button class="chip topic" data-topic="genai">GenAI</button><button class="chip topic" data-topic="llms">LLMs</button><button class="chip topic" data-topic="prompt">Prompt</button><button class="chip topic" data-topic="rag">RAG</button><button class="chip topic" data-topic="agents">Agents</button><button class="chip topic" data-topic="finetune">Fine-tuning</button><button class="chip topic" data-topic="ethics">Ethics</button><button class="chip topic" data-topic="cloud">Cloud AI</button><button class="chip topic" data-topic="strategy">Strategy</button><button class="chip topic" data-topic="mcp">MCP</button><button class="chip topic" data-topic="transformers">Transformers</button></div></div>
+  <div class="filter-row"><span class="filter-label">Time</span><div class="range-wrap"><input type="range" id="time-range" min="1" max="120" value="120" step="1" oninput="onTimeFilter(this.value)"><span class="range-val" id="time-val">Any duration</span></div><input class="search-input" id="search-input" type="text" placeholder="Search courses..." oninput="onSearch(this.value)"></div>
+</div>
+<div id="stats-bar"><span>Showing <strong id="showing-count">0</strong> of <strong id="total-count">0</strong> courses</span><button class="btn" id="clear-btn" onclick="clearProgress()" style="font-size:10px;padding:4px 10px;display:none">Clear progress</button></div>
+<div id="course-grid"></div>
+</div>
+<div id="modal-overlay" onclick="onOverlayClick(event)">
+  <div class="modal" id="m-decision-tree" style="display:none">
+    <div class="modal-header"><div class="modal-title">Find My Path</div><button class="modal-close" onclick="closeModal()">x</button></div>
+    <div class="modal-body">
+      <div class="dt-progress" id="dt-dots"><div class="dt-prog-dot active"></div><div class="dt-prog-dot"></div><div class="dt-prog-dot"></div><div class="dt-prog-dot"></div></div>
+      <div class="dt-step active" data-step="0"><div class="dt-q">What is your background?</div><div class="dt-opts"><div class="dt-opt" onclick="dtAnswer('role','dev',this)">Software Developer</div><div class="dt-opt" onclick="dtAnswer('role','manager',this)">Manager / Leader</div><div class="dt-opt" onclick="dtAnswer('role','researcher',this)">Data Scientist / Researcher</div><div class="dt-opt" onclick="dtAnswer('role','beginner',this)">Complete Beginner</div></div></div>
+      <div class="dt-step" data-step="1"><div class="dt-q">How much time do you have?</div><div class="dt-opts"><div class="dt-opt" onclick="dtAnswer('time','2h',this)">Under 2 hours</div><div class="dt-opt" onclick="dtAnswer('time','6h',this)">Half day (4-6 hrs)</div><div class="dt-opt" onclick="dtAnswer('time','12h',this)">Full day (8-12 hrs)</div><div class="dt-opt" onclick="dtAnswer('time','weeks',this)">Multiple weeks</div></div><button class="dt-back" onclick="dtBack()">Back</button></div>
+      <div class="dt-step" data-step="2"><div class="dt-q">What is your primary goal?</div><div class="dt-opts"><div class="dt-opt" onclick="dtAnswer('goal','signal',this)">Add LinkedIn credentials fast</div><div class="dt-opt" onclick="dtAnswer('goal','upskill',this)">Learn GenAI deeply</div><div class="dt-opt" onclick="dtAnswer('goal','career',this)">Career change / new job</div><div class="dt-opt" onclick="dtAnswer('goal','lead',this)">Lead AI strategy</div></div><button class="dt-back" onclick="dtBack()">Back</button></div>
+      <div class="dt-step" data-step="3"><div class="dt-q" style="color:var(--t1)">Your personalized recommendations</div><div class="dt-results" id="dt-results"></div><button class="dt-back" onclick="dtBack()">Start over</button></div>
+    </div>
+  </div>
+  <div class="modal" id="m-study-plan" style="display:none">
+    <div class="modal-header"><div class="modal-title">Study Plan Generator</div><button class="modal-close" onclick="closeModal()">x</button></div>
+    <div class="modal-body">
+      <div class="modal-row"><div class="modal-section"><div class="modal-label">Hours per week</div><input class="modal-input" id="sp-hours" type="number" min="1" max="40" value="5"></div><div class="modal-section"><div class="modal-label">Target date</div><input class="modal-input" id="sp-date" type="date"></div></div>
+      <div class="modal-section"><div class="modal-label">Include tiers</div><div class="chips" style="gap:6px"><button class="chip active t1" id="sp-t1" onclick="this.classList.toggle('active')">Free + Badge</button><button class="chip" id="sp-t2" onclick="this.classList.toggle('active')">Free Only</button><button class="chip" id="sp-t3" onclick="this.classList.toggle('active')">Paid</button></div></div>
+      <div id="sp-result" class="week-plan"></div>
+    </div>
+    <div class="modal-footer"><button class="btn-modal cancel" onclick="closeModal()">Close</button><button class="btn-modal go" onclick="generateStudyPlan()">Generate Plan</button></div>
+  </div>
+  <div class="modal wide" id="m-cv" style="display:none">
+    <div class="modal-header"><div class="modal-title">CV / Resume Matcher</div><button class="modal-close" onclick="closeModal()">x</button></div>
+    <div class="modal-body"><p>Paste your CV. Claude will identify the 5 certificates that best address your skill gaps.</p><div class="modal-section"><div class="modal-label">Your CV / Resume</div><textarea class="modal-textarea" id="cv-input" placeholder="Paste your CV text here..." style="min-height:160px"></textarea></div><div id="cv-result"></div></div>
+    <div class="modal-footer"><button class="btn-modal cancel" onclick="closeModal()">Close</button><button class="btn-modal go" id="cv-btn" onclick="runCVMatcher()">Analyze with Claude</button></div>
+  </div>
+  <div class="modal wide" id="m-job" style="display:none">
+    <div class="modal-header"><div class="modal-title">Job Listing Analyzer</div><button class="modal-close" onclick="closeModal()">x</button></div>
+    <div class="modal-body"><p>Paste a job description. Claude will highlight which certificates match the required skills.</p><div class="modal-section"><div class="modal-label">Job Description</div><textarea class="modal-textarea" id="job-input" placeholder="Paste job description here..." style="min-height:160px"></textarea></div><div id="job-result"></div></div>
+    <div class="modal-footer"><button class="btn-modal cancel" onclick="closeModal()">Close</button><button class="btn-modal go" id="job-btn" onclick="runJobAnalyzer()">Analyze with Claude</button></div>
+  </div>
+  <div class="modal" id="m-refresh" style="display:none">
+    <div class="modal-header"><div class="modal-title">Verify Availability</div><button class="modal-close" onclick="closeModal()">x</button></div>
+    <div class="modal-body"><p>Claude will flag any free courses that may have changed, been paywalled, or discontinued.</p><div id="refresh-result"></div></div>
+    <div class="modal-footer"><button class="btn-modal cancel" onclick="closeModal()">Close</button><button class="btn-modal go" id="refresh-btn" onclick="runAutoRefresh()">Verify with Claude</button></div>
+  </div>
+  <div class="modal" id="m-tip" style="display:none">
+    <div class="modal-header"><div class="modal-title" id="tip-modal-title">LinkedIn Profile Tip</div><button class="modal-close" onclick="closeModal()">x</button></div>
+    <div class="modal-body"><div id="tip-modal-body"></div></div>
+    <div class="modal-footer"><button class="btn-modal cancel" onclick="closeModal()">Close</button></div>
+  </div>
+  <div class="modal" id="m-share" style="display:none">
+    <div class="modal-header"><div class="modal-title">Share Your Progress</div><button class="modal-close" onclick="closeModal()">x</button></div>
+    <div class="modal-body"><p>Share your completed certificates. Anyone with this link sees which courses you have earned.</p><div class="share-url" id="share-url-display"></div><div class="copy-feedback" id="copy-feedback"></div></div>
+    <div class="modal-footer"><button class="btn-modal cancel" onclick="closeModal()">Close</button><button class="btn-modal go" onclick="copyShareUrl()">Copy Link</button></div>
+  </div>
+</div>
+<script>
+var COURSES=[
+{id:"db-genai",title:"Generative AI Fundamentals",prov:"Databricks",pc:"#ff3621",tier:1,h:1.5,cred:"Digital Badge",url:"https://www.databricks.com/resources/learn/training/generative-ai-fundamentals",diff:"none",tp:["genai","llms"],rl:["dev","manager","researcher","beginner"],sal:null,vf:"Mar 2026",sprint:true,tip:"Title: Generative AI Fundamentals Accreditation\nIssuer: Databricks Academy\n\nIn description: Passed assessment on LLM fundamentals, GenAI applications, and risk strategies.",nx:["db-agents","google-skill"],tg:["Sprint"]},
+{id:"db-agents",title:"AI Agents Fundamentals",prov:"Databricks",pc:"#ff3621",tier:1,h:1.5,cred:"Digital Badge",url:"https://www.databricks.com/resources/training/level-your-ai-agent-skills",diff:"none",tp:["agents","genai"],rl:["dev","manager","researcher","beginner"],sal:null,vf:"Mar 2026",sprint:true,tip:"Title: AI Agents Fundamentals Accreditation\nIssuer: Databricks Academy\n\nIn description: Multi-agent architectures, agentic AI workflows, enterprise LLM applications.",nx:["hf-agents","anthropic-mcp"],tg:["Sprint"]},
+{id:"google-skill",title:"Generative AI Fundamentals Skill Badge",prov:"Google Cloud",pc:"#4285f4",tier:1,h:2,cred:"Google Skill Badge",url:"https://www.cloudskillsboost.google/paths/118/course_templates/556",diff:"none",tp:["genai","llms","ethics"],rl:["dev","manager","researcher","beginner"],sal:null,vf:"Mar 2026",sprint:true,tip:"Title: Generative AI Fundamentals\nIssuer: Google Cloud\n\nThis Verified Skill Badge is a step above a completion badge. Add from your Google Skills Boost profile.",nx:["google-leader","aws-educate"],tg:["Top Pick"]},
+{id:"google-intro-genai",title:"Introduction to Generative AI",prov:"Google Cloud",pc:"#4285f4",tier:1,h:0.5,cred:"Completion Badge",url:"https://www.cloudskillsboost.google/paths/118/course_templates/536",diff:"none",tp:["genai"],rl:["manager","beginner"],sal:null,vf:"Mar 2026",sprint:false,tip:"Part of GenAI Fundamentals path. Add the overall Skill Badge rather than individual courses for a cleaner profile.",nx:["google-skill"],tg:[]},
+{id:"google-transformers",title:"Transformer Models and BERT",prov:"Google Cloud",pc:"#4285f4",tier:1,h:0.75,cred:"Completion Badge",url:"https://www.cloudskillsboost.google/paths/118/course_templates/538",diff:"ml",tp:["transformers","llms"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Add to LinkedIn Skills: Transformer Architecture, BERT. Reference in portfolio project descriptions.",nx:["google-skill"],tg:[]},
+{id:"google-leader",title:"Generative AI Leader Path",prov:"Google Cloud",pc:"#4285f4",tier:1,h:8,cred:"5 Badges",url:"https://www.skills.google/paths/1951",diff:"none",tp:["strategy","genai","agents"],rl:["manager"],sal:null,vf:"Mar 2026",sprint:false,tip:"5 individual badges. Add the most relevant to your current role. For strategy roles, highlight Gen AI Agents: Transform Your Organization.",nx:["li-leaders","oxford-ai"],tg:[]},
+{id:"li-career",title:"Career Essentials in Generative AI",prov:"LinkedIn / Microsoft",pc:"#00bcf2",tier:1,h:4,cred:"LinkedIn Prof. Certificate",url:"https://www.linkedin.com/learning/paths/career-essentials-in-generative-ai-by-microsoft-and-linkedin",diff:"none",tp:["genai","ethics","prompt"],rl:["manager","beginner"],sal:null,vf:"Mar 2026",sprint:true,tip:"Auto-added to LinkedIn Licenses and Certifications after completion. Most recognized free GenAI credential globally.",nx:["li-azure-ai","az-900"],tg:["Top Earner"]},
+{id:"li-azure-ai",title:"Microsoft Azure AI Essentials",prov:"LinkedIn / Microsoft",pc:"#00bcf2",tier:1,h:3.5,cred:"LinkedIn Prof. Certificate",url:"https://www.linkedin.com/learning/paths/microsoft-azure-ai-essentials-professional-certificate",diff:"none",tp:["cloud","genai","llms"],rl:["dev","manager"],sal:null,vf:"Mar 2026",sprint:false,tip:"Pairs well with Azure AI-900 exam. In description: Azure Cognitive Services, NLP, Computer Vision, Document Intelligence.",nx:["az-900","az-102"],tg:[]},
+{id:"li-leaders",title:"AI for Organizational Leaders",prov:"LinkedIn / Microsoft",pc:"#00bcf2",tier:1,h:5,cred:"LinkedIn Certificate",url:"https://www.linkedin.com/learning/paths/ai-for-organizational-leaders",diff:"none",tp:["strategy","ethics"],rl:["manager"],sal:null,vf:"Mar 2026",sprint:false,tip:"Strong for executive profiles. In description: AI regulation, multimodal models, agentic AI workflows, organizational transformation.",nx:["oxford-ai"],tg:[]},
+{id:"ms-applied-semantic",title:"Develop GenAI Apps with Azure OpenAI",prov:"Microsoft",pc:"#00bcf2",tier:1,h:0.75,cred:"MS Applied Skills Badge",url:"https://learn.microsoft.com/en-us/credentials/applied-skills/develop-ai-agents-using-microsoft-azure-openai-and-semantic-kernel/",diff:"cloud",tp:["agents","cloud","llms"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"Lab-assessed credential - high-signal for Azure developer roles. Add from Microsoft Learn profile.",nx:["az-102"],tg:["Lab-assessed"]},
+{id:"anthropic-101",title:"Claude 101",prov:"Anthropic",pc:"#d4724a",tier:1,h:1.5,cred:"Official Certificate",url:"https://anthropic.skilljar.com/",diff:"none",tp:["prompt","genai"],rl:["dev","manager","beginner"],sal:null,vf:"Mar 2026",sprint:true,tip:"Title: Claude 101\nIssuer: Anthropic\n\nFirst-mover advantage. Add note: Completed at launch of Anthropic Academy, March 2026.",nx:["anthropic-fluency","anthropic-api"],tg:["New"]},
+{id:"anthropic-fluency",title:"AI Fluency: Framework and Foundations",prov:"Anthropic",pc:"#d4724a",tier:1,h:2.5,cred:"Official Certificate",url:"https://anthropic.skilljar.com/",diff:"none",tp:["genai","ethics","strategy"],rl:["dev","manager","researcher","beginner"],sal:null,vf:"Mar 2026",sprint:false,tip:"Title: AI Fluency\nIssuer: Anthropic\n\nIn description: 4D AI Fluency framework. Co-developed with university professors under Creative Commons.",nx:["anthropic-api"],tg:["Flagship"]},
+{id:"anthropic-api",title:"Building with the Claude API",prov:"Anthropic",pc:"#d4724a",tier:1,h:8,cred:"Official Certificate",url:"https://anthropic.skilljar.com/",diff:"python",tp:["llms","prompt","agents"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"High signal for developer roles. In description: System prompts, tool use, context window management, streaming, production AI applications.",nx:["anthropic-mcp","hf-agents"],tg:["Developer"]},
+{id:"anthropic-mcp",title:"Introduction to Model Context Protocol",prov:"Anthropic",pc:"#d4724a",tier:1,h:3.5,cred:"Official Certificate",url:"https://anthropic.skilljar.com/",diff:"python",tp:["mcp","agents"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Cutting-edge credential. Add MCP as a LinkedIn Skill - very few people have it yet.",nx:["hf-mcp"],tg:[]},
+{id:"anthropic-claude-code",title:"Claude Code in Action",prov:"Anthropic",pc:"#d4724a",tier:1,h:3,cred:"Official Certificate",url:"https://anthropic.skilljar.com/",diff:"python",tp:["agents","llms"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"In description: Agentic coding workflows with Claude Code CLI. Task automation, codebase navigation, multi-step development pipelines.",nx:["anthropic-mcp"],tg:[]},
+{id:"aws-educate",title:"AWS Educate: Intro to Generative AI",prov:"AWS",pc:"#ff9900",tier:1,h:3,cred:"Credly Badge",url:"https://aws.amazon.com/training/digital/aws-educate-introduction-to-generative-ai/",diff:"none",tp:["genai","cloud","llms"],rl:["dev","manager","beginner"],sal:null,vf:"Mar 2026",sprint:false,tip:"Add via Credly.com. Title: AWS Educate: Introduction to Generative AI. AWS brand carries strong enterprise weight.",nx:["aws-decision-makers","aws-cloud-quest"],tg:["Best Entry"]},
+{id:"aws-decision-makers",title:"GenAI Learning Plan for Decision Makers",prov:"AWS",pc:"#ff9900",tier:1,h:1.5,cred:"Credly Knowledge Badge",url:"https://explore.skillbuilder.aws/learn/learning_plan/view/1909/generative-ai-learning-plan-for-decision-makers",diff:"none",tp:["genai","strategy"],rl:["manager","beginner"],sal:null,vf:"Mar 2026",sprint:false,tip:"Title: AWS Knowledge: Generative AI. 90-minute path to a Credly badge. Best for non-technical managers.",nx:["aws-cloud-quest"],tg:["Fastest Badge"]},
+{id:"aws-cloud-quest",title:"AWS Cloud Quest: GenAI Practitioner",prov:"AWS",pc:"#ff9900",tier:1,h:10,cred:"Credly Badge",url:"https://aws.amazon.com/training/digital/aws-cloud-quest/",diff:"python",tp:["cloud","genai","rag","llms"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"In description: Hands-on with Bedrock, Titan, Llama, Mistral. RAG, prompt engineering, embeddings.",nx:["aws-ai-practitioner"],tg:["Most Hands-On"]},
+{id:"ibm-genai-action",title:"Generative AI in Action",prov:"IBM",pc:"#0062ff",tier:1,h:10,cred:"IBM Credly Badge",url:"https://skillsbuild.org/adult-learners/explore-learning/generative-ai",diff:"python",tp:["genai","prompt","llms","ethics"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"IBM brand carries strong enterprise weight. In description: Prompt engineering, Python, foundation models, ethical AI.",nx:["dl-genai-llms"],tg:["Best IBM"]},
+{id:"ibm-ai-fundamentals",title:"Artificial Intelligence Fundamentals",prov:"IBM",pc:"#0062ff",tier:1,h:8,cred:"IBM Credly Badge",url:"https://skillsbuild.org/adult-learners/explore-learning/artificial-intelligence",diff:"none",tp:["genai","llms","ethics"],rl:["manager","beginner"],sal:null,vf:"Mar 2026",sprint:false,tip:"Good for non-technical profiles. Covers NLP, computer vision, deep learning, Watson Studio.",nx:["ibm-genai-action"],tg:[]},
+{id:"nvidia-genai",title:"Generative AI Explained",prov:"NVIDIA",pc:"#76b900",tier:1,h:2,cred:"DLI Certificate",url:"https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-07+V1",diff:"none",tp:["genai","llms","ethics"],rl:["dev","manager","researcher","beginner"],sal:null,vf:"Mar 2026",sprint:true,tip:"Title: Generative AI Explained\nIssuer: NVIDIA Deep Learning Institute\n\nDLI certificate is well-recognized in AI engineering circles.",nx:["hf-agents","dl-genai-llms"],tg:["Free Confirmed"]},
+{id:"hf-agents",title:"AI Agents Course - Fundamentals",prov:"Hugging Face",pc:"#ff9d00",tier:1,h:5,cred:"PDF Certificate",url:"https://huggingface.co/learn/agents-course",diff:"python",tp:["agents","rag","llms"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Upload the PDF certificate as media to your LinkedIn cert entry. Add smolagents, LangGraph, LlamaIndex as Skills.",nx:["hf-mcp","anthropic-mcp"],tg:[]},
+{id:"hf-mcp",title:"Model Context Protocol Course",prov:"Hugging Face",pc:"#ff9d00",tier:1,h:3.5,cred:"PDF Certificate",url:"https://huggingface.co/learn/mcp-course",diff:"python",tp:["mcp","agents"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"First-mover credential in the MCP ecosystem. Built in partnership with Anthropic.",nx:["anthropic-api"],tg:["Co-built w/ Anthropic"]},
+{id:"cisco-modern-ai",title:"Introduction to Modern AI",prov:"Cisco",pc:"#049fd9",tier:1,h:7,cred:"Credly Digital Badge",url:"https://www.netacad.com/courses/introduction-to-modern-ai",diff:"none",tp:["genai","prompt","ethics"],rl:["manager","beginner"],sal:null,vf:"Mar 2026",sprint:false,tip:"Add via Credly.com. Good for networking professionals transitioning to AI.",nx:["li-career"],tg:[]},
+{id:"dl-prompt-eng",title:"ChatGPT Prompt Engineering for Developers",prov:"DeepLearning.AI",pc:"#d4312b",tier:2,h:1.5,cred:"Accomplishment only",url:"https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/",diff:"python",tp:["prompt","llms"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"No badge. Reference in LinkedIn About section. Alternatively post a screenshot on LinkedIn - posts outperform cert entries for engagement.",nx:["dl-building-systems","dl-langchain"],tg:["Andrew Ng + OpenAI"]},
+{id:"dl-building-systems",title:"Building Systems with the ChatGPT API",prov:"DeepLearning.AI",pc:"#d4312b",tier:2,h:1.5,cred:"Accomplishment",url:"https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/",diff:"python",tp:["llms","agents","prompt"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"No badge. Reference in project descriptions: Multi-step LLM pipelines with moderation and evaluation. Add OpenAI API as a LinkedIn Skill.",nx:["dl-langchain"],tg:[]},
+{id:"dl-langchain",title:"LangChain for LLM Application Development",prov:"DeepLearning.AI",pc:"#d4312b",tier:2,h:1.5,cred:"Accomplishment",url:"https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/",diff:"python",tp:["agents","rag","llms"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Add LangChain to LinkedIn Skills - widely recognized keyword.",nx:["dl-adv-rag","dl-agents-langgraph"],tg:[]},
+{id:"dl-adv-rag",title:"Building and Evaluating Advanced RAG",prov:"DeepLearning.AI",pc:"#d4312b",tier:2,h:1.5,cred:"Accomplishment",url:"https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/",diff:"python",tp:["rag","llms"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"RAG is one of the most in-demand skills in 2026. Add RAG and LlamaIndex to LinkedIn Skills.",nx:["dl-agents-langgraph"],tg:["RAG Deep Dive"]},
+{id:"dl-agents-langgraph",title:"AI Agents in LangGraph",prov:"DeepLearning.AI",pc:"#d4312b",tier:2,h:1.5,cred:"Accomplishment",url:"https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/",diff:"python",tp:["agents","rag"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Add LangGraph to LinkedIn Skills - growing demand in production agent pipelines.",nx:["dl-multi-agent","hf-agents"],tg:[]},
+{id:"dl-multi-agent",title:"Multi-AI Agent Systems with crewAI",prov:"DeepLearning.AI",pc:"#d4312b",tier:2,h:1.5,cred:"Accomplishment",url:"https://www.deeplearning.ai/short-courses/multi-ai-agent-systems-with-crewai/",diff:"python",tp:["agents"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"Add crewAI and Multi-agent systems to LinkedIn Skills.",nx:["hf-agents"],tg:[]},
+{id:"elements-of-ai",title:"Introduction to AI + Building AI",prov:"Univ. of Helsinki",pc:"#6b47ff",tier:2,h:15,cred:"PDF cert (no Credly)",url:"https://www.elementsofai.com/",diff:"none",tp:["genai","ethics","llms"],rl:["manager","beginner","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Download PDF from Elements of AI. Optional: earn ECTS credit for 25 euros from University of Helsinki.",nx:["ibm-ai-fundamentals"],tg:["300k completions"]},
+{id:"fastai",title:"Practical Deep Learning for Coders",prov:"fast.ai",pc:"#00bcd4",tier:2,h:35,cred:"No certificate",url:"https://course.fast.ai/",diff:"python",tp:["llms","transformers","finetune"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"No certificate. Reference fast.ai in your About section or GitHub READMEs. Completing fast.ai plus a portfolio project is far stronger signal than most badges.",nx:["dl-genai-llms"],tg:["Practitioner Gold"]},
+{id:"aws-ai-practitioner",title:"AWS Certified AI Practitioner (AIF-C01)",prov:"AWS",pc:"#ff9900",tier:3,h:40,cred:"Paid Certification",url:"https://aws.amazon.com/certification/certified-ai-practitioner/",diff:"none",tp:["cloud","genai","llms","ethics"],rl:["dev","manager"],sal:"~20% salary lift",vf:"Mar 2026",sprint:false,tip:"Credly badge auto-issued after passing. Appears in 38% of AI job postings. Add certification number for authenticity.",nx:["aws-ml-specialty"],tg:["Best Entry Paid"],cost:"$150 exam"},
+{id:"aws-ml-specialty",title:"AWS Certified Machine Learning - Specialty",prov:"AWS",pc:"#ff9900",tier:3,h:120,cred:"Paid Certification",url:"https://aws.amazon.com/certification/certified-machine-learning-specialty/",diff:"ml",tp:["cloud","llms","finetune"],rl:["dev","researcher"],sal:"~25% salary lift",vf:"Mar 2026",sprint:false,tip:"One of the most-cited ML credentials globally. In description: Data engineering, EDA, modeling, SageMaker deployment at scale.",nx:["google-pro-ml"],tg:["Industry Standard"],cost:"$300 exam"},
+{id:"google-pro-ml",title:"Google Professional ML Engineer",prov:"Google Cloud",pc:"#4285f4",tier:3,h:80,cred:"Paid Certification",url:"https://cloud.google.com/certification/machine-learning-engineer",diff:"ml",tp:["cloud","llms","finetune"],rl:["dev","researcher"],sal:"~25% salary lift",vf:"Mar 2026",sprint:false,tip:"Listed in 25% of senior ML job postings. Title: Google Cloud Professional Machine Learning Engineer.",nx:["db-genai-engineer"],tg:["Industry Standard"],cost:"$200 exam"},
+{id:"az-900",title:"Azure AI Fundamentals (AI-900)",prov:"Microsoft",pc:"#00bcf2",tier:3,h:20,cred:"Paid Certification",url:"https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/",diff:"none",tp:["cloud","genai","ethics"],rl:["dev","manager","beginner"],sal:null,vf:"Mar 2026",sprint:false,tip:"Study path fully free on Microsoft Learn. Title: Microsoft Certified: Azure AI Fundamentals. Good stepping stone before AI-102.",nx:["az-102"],tg:["Best Entry Paid"],cost:"$165 exam"},
+{id:"az-102",title:"Azure AI Engineer Associate (AI-102)",prov:"Microsoft",pc:"#00bcf2",tier:3,h:60,cred:"Paid Certification",url:"https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/",diff:"cloud",tp:["cloud","llms","agents"],rl:["dev"],sal:"~20% salary lift",vf:"Mar 2026",sprint:false,tip:"Study materials free on Microsoft Learn. In description: Azure Cognitive Services, Language Studio, Azure OpenAI Service, Bot Service.",nx:["aws-ml-specialty"],tg:["Enterprise Standard"],cost:"$165 exam"},
+{id:"db-genai-engineer",title:"Databricks GenAI Engineer Associate",prov:"Databricks",pc:"#ff3621",tier:3,h:50,cred:"Paid Certification",url:"https://www.databricks.com/learn/certification/generative-ai-engineer-associate",diff:"ml",tp:["rag","finetune","agents","llms"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Most technically rigorous GenAI-specific exam. In description: RAG pipelines, fine-tuning, multi-agent systems, LLMOps, governance on Databricks.",nx:["aws-ml-specialty"],tg:["Hot 2026"],cost:"~$200 exam"},
+{id:"dl-genai-llms",title:"Generative AI with Large Language Models",prov:"DeepLearning.AI",pc:"#d4312b",tier:3,h:30,cred:"Coursera Certificate",url:"https://www.coursera.org/learn/generative-ai-with-llms",diff:"python",tp:["llms","finetune","rag","prompt"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Andrew Ng plus AWS co-developed. In description: Transformers, fine-tuning with PEFT/LoRA, RLHF, RAG, LLMOps.",nx:["dl-deep-learning","db-genai-engineer"],tg:["Andrew Ng + AWS"],cost:"~$49/mo Coursera"},
+{id:"dl-deep-learning",title:"Deep Learning Specialization",prov:"DeepLearning.AI",pc:"#d4312b",tier:3,h:80,cred:"Coursera Certificate",url:"https://www.coursera.org/specializations/deep-learning",diff:"python",tp:["transformers","llms","finetune"],rl:["dev","researcher"],sal:null,vf:"Mar 2026",sprint:false,tip:"Gold standard. Referenced by virtually every senior AI engineer. Title: Deep Learning - DeepLearning.AI.",nx:["dl-genai-llms","aws-ml-specialty"],tg:["Gold Standard"],cost:"~$49/mo Coursera"},
+{id:"dl-genai-software-dev",title:"Generative AI for Software Development",prov:"DeepLearning.AI",pc:"#d4312b",tier:3,h:25,cred:"Coursera Certificate",url:"https://www.coursera.org/specializations/generative-ai-for-software-development",diff:"python",tp:["llms","prompt","agents"],rl:["dev"],sal:null,vf:"Mar 2026",sprint:false,tip:"In description: AI-assisted refactoring, debugging, documentation, test generation with LLMs.",nx:["anthropic-api"],tg:["Developer Focus"],cost:"~$49/mo Coursera"},
+{id:"mit-ml-ai",title:"MIT Professional Education - ML and AI",prov:"MIT",pc:"#8a0000",tier:3,h:120,cred:"MIT Certificate",url:"https://professional.mit.edu/programs/short-programs/machine-learning-big-data",diff:"ml",tp:["llms","transformers","finetune","ethics"],rl:["dev","researcher","manager"],sal:null,vf:"Mar 2026",sprint:false,tip:"Add under Education, not Licenses and Certifications - carries more weight. Title: MIT Professional Education - Machine Learning and AI.",nx:[],tg:["Prestige"],cost:"$2300-$3500"},
+{id:"oxford-ai",title:"Oxford Said - AI Programme",prov:"Oxford University",pc:"#002147",tier:3,h:80,cred:"Oxford Certificate",url:"https://www.sbs.ox.ac.uk/programmes/executive-education/online-programmes/oxford-artificial-intelligence-programme",diff:"none",tp:["strategy","ethics","genai"],rl:["manager"],sal:null,vf:"Mar 2026",sprint:false,tip:"Add under Education. Title: Oxford Artificial Intelligence Programme. Institution: University of Oxford (Said Business School).",nx:[],tg:["Leadership"],cost:"$2500-$4000"}
+];
+var TOPIC_LABELS={genai:"GenAI",llms:"LLMs",prompt:"Prompt Eng",rag:"RAG",agents:"Agents",finetune:"Fine-tuning",ethics:"Ethics",cloud:"Cloud AI",strategy:"Strategy",mcp:"MCP",transformers:"Transformers"};
+var DIFF_LABELS={none:"No prereqs",python:"Python needed",ml:"ML background",cloud:"Cloud exp"};
+var DIFF_CLASSES={none:"diff-none",python:"diff-python",ml:"diff-ml",cloud:"diff-cloud"};
+var state={filters:{tier:"all",role:"all",topic:"all",maxH:120,q:""},progress:new Set(),highlighted:new Set(),flagged:new Set(),dtAnswers:{},dtStep:0};
+function saveProgress(){try{localStorage.setItem("genai-v2",JSON.stringify([...state.progress]))}catch(e){}}
+function loadProgress(){
+  var hash=location.hash;
+  if(hash.indexOf("#p=")===0){try{var ids=JSON.parse(atob(hash.slice(3)));if(Array.isArray(ids)&&ids.length>0){state.progress=new Set(ids);document.getElementById("shared-banner").classList.add("show");return}}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem("genai-v2")||"[]");state.progress=new Set(saved)}catch(e){state.progress=new Set()}
+}
+function saveSharedProgress(){try{localStorage.setItem("genai-v2",JSON.stringify([...state.progress]))}catch(e){}history.replaceState(null,"",location.pathname);document.getElementById("shared-banner").classList.remove("show")}
+function getFiltered(){return COURSES.filter(function(c){if(state.filters.tier!=="all"&&c.tier!==parseInt(state.filters.tier))return false;if(state.filters.role!=="all"&&c.rl.indexOf(state.filters.role)<0)return false;if(state.filters.topic!=="all"&&c.tp.indexOf(state.filters.topic)<0)return false;if(c.h>state.filters.maxH)return false;if(state.filters.q){var q=state.filters.q.toLowerCase();if(c.title.toLowerCase().indexOf(q)<0&&c.prov.toLowerCase().indexOf(q)<0&&!c.tp.some(function(t){return t.indexOf(q)>=0}))return false}return true})}
+function renderGrid(){
+  var filtered=getFiltered();
+  var grid=document.getElementById("course-grid");
+  document.getElementById("showing-count").textContent=filtered.length;
+  document.getElementById("total-count").textContent=COURSES.length;
+  document.getElementById("clear-btn").style.display=state.progress.size>0?"block":"none";
+  if(!filtered.length){grid.innerHTML='<div class="empty-state"><h3>No courses match your filters</h3><p>Try broadening the time range or clearing topic/role filters.</p></div>';updateProgress();return}
+  var t1=filtered.filter(function(c){return c.tier===1}),t2=filtered.filter(function(c){return c.tier===2}),t3=filtered.filter(function(c){return c.tier===3});
+  var html="";
+  if(t1.length){html+='<div class="tier-head"><div class="tier-head-bar" style="background:var(--t1)"></div><div><div class="tier-head-title" style="color:var(--t1)">Tier 1 - Free + Shareable Badge</div><div class="tier-head-sub">Credly / Google Skill Badge / LinkedIn Certificate / PDF Certificate</div></div><div class="tier-head-count">'+t1.length+" shown</div></div>";html+=t1.map(renderCard).join("")}
+  if(t2.length){html+='<div class="tier-head"><div class="tier-head-bar" style="background:var(--t2)"></div><div><div class="tier-head-title" style="color:var(--t2)">Tier 2 - Free, Completion Only</div><div class="tier-head-sub">Internal accomplishments - No Credly verification - Still high-quality content</div></div><div class="tier-head-count">'+t2.length+" shown</div></div>";html+=t2.map(renderCard).join("")}
+  if(t3.length){html+='<div class="tier-head"><div class="tier-head-bar" style="background:var(--t3)"></div><div><div class="tier-head-title" style="color:var(--t3)">Tier 3 - Paid Certifications Worth It</div><div class="tier-head-sub">Appear in job postings - Rigorous exams - High salary correlation</div></div><div class="tier-head-count">'+t3.length+" shown</div></div>";html+=t3.map(renderCard).join("")}
+  grid.innerHTML=html;updateProgress()
+}
+function renderCard(c){
+  var done=state.progress.has(c.id),hi=state.highlighted.has(c.id),fl=state.flagged.has(c.id);
+  var tbc=c.tier===1?"b-t1":c.tier===2?"b-t2":"b-t3";
+  var tbl=c.tier===1?"T1 Free+Badge":c.tier===2?"T2 Free":"T3 Paid";
+  var topH=c.tp.map(function(t){return'<span class="topic-pill" onclick="filterTopic(\''+t+'\')">'+( TOPIC_LABELS[t]||t)+"</span>"}).join("");
+  var tgH=c.tg.map(function(t){return'<span class="badge b-star">'+t+"</span>"}).join("");
+  var ts=c.h<1?(Math.round(c.h*60)+"min"):(c.h+"h");
+  var salH=c.sal?'<span class="badge b-salary">'+c.sal+"</span>":"";
+  var flH=fl?'<span class="badge b-warn">Verify</span>':"";
+  var costH=c.cost?'<span class="badge b-t3">'+c.cost+"</span>":"";
+  var nxH="";
+  if(done&&c.nx&&c.nx.length){var nexts=c.nx.map(function(id){return COURSES.find(function(x){return x.id===id})}).filter(Boolean);if(nexts.length)nxH='<div class="next-steps"><div class="next-steps-label">Next up</div>'+nexts.map(function(n){return'<a class="next-link" href="'+n.url+'" target="_blank">'+n.title+"</a>"}).join("")+"</div>"}
+  var cls=["card",done?"done":"",hi?"highlighted":"",fl?"flagged":""].filter(Boolean).join(" ");
+  return '<div class="'+cls+'" id="card-'+c.id+'"><div class="card-top" style="background:'+c.pc+'"></div><div class="card-body"><div class="provider-name">'+c.prov+'</div><div class="card-header"><div class="card-check" onclick="toggleProgress(\''+c.id+'\')">'+(done?"v":"")+'</div><div class="card-title">'+c.title+'</div></div><div class="card-meta"><span class="badge '+tbc+'">'+tbl+'</span><span class="badge b-time">'+ts+"</span>"+'<span class="diff-badge '+(DIFF_CLASSES[c.diff]||"diff-none")+'">'+(DIFF_LABELS[c.diff]||"No prereqs")+"</span>"+tgH+salH+flH+costH+'</div><div class="card-topics">'+topH+'</div><div class="card-footer"><div class="card-verified">Verified '+c.vf+'</div><div class="card-actions"><button class="tip-btn" onclick="showTip(\''+c.id+'\')">LinkedIn tip</button><a class="card-link" href="'+c.url+'" target="_blank">Open</a></div></div>'+nxH+"</div></div>"
+}
+function updateProgress(){var t=COURSES.length,d=state.progress.size;document.getElementById("prog-count").textContent=d;document.getElementById("prog-total").textContent=t;document.getElementById("prog-fill").style.width=(d/t*100)+"%"}
+function setupChips(id,key){document.getElementById(id).addEventListener("click",function(e){var chip=e.target.closest(".chip");if(!chip)return;var val=chip.dataset[key];if(!val)return;state.filters[key]=val;document.querySelectorAll("#"+id+" .chip").forEach(function(c){c.classList.remove("active")});chip.classList.add("active");renderGrid()})}
+function onTimeFilter(v){state.filters.maxH=parseInt(v);document.getElementById("time-val").textContent=parseInt(v)>=120?"Any duration":"<= "+v+" hrs";renderGrid()}
+function onSearch(v){state.filters.q=v.trim();renderGrid()}
+function filterTopic(t){state.filters.topic=t;document.querySelectorAll("#topic-chips .chip").forEach(function(c){c.classList.remove("active");if(c.dataset.topic===t)c.classList.add("active")});renderGrid()}
+function toggleProgress(id){if(state.progress.has(id))state.progress.delete(id);else state.progress.add(id);saveProgress();renderGrid()}
+function clearProgress(){if(!confirm("Clear all progress?"))return;state.progress.clear();saveProgress();renderGrid()}
+var currentModal=null;
+function openModal(name){document.querySelectorAll(".modal").forEach(function(m){m.style.display="none"});var m=document.getElementById("m-"+name);if(m){m.style.display="block";currentModal=name}document.getElementById("modal-overlay").classList.add("open");if(name==="share")buildShareUrl();if(name==="study-plan"){var d=new Date();d.setMonth(d.getMonth()+3);document.getElementById("sp-date").value=d.toISOString().split("T")[0]}}
+function closeModal(){document.getElementById("modal-overlay").classList.remove("open");document.querySelectorAll(".modal").forEach(function(m){m.style.display="none"});currentModal=null;state.highlighted.clear();renderGrid()}
+function onOverlayClick(e){if(e.target===document.getElementById("modal-overlay"))closeModal()}
+function showTip(id){var c=COURSES.find(function(x){return x.id===id});if(!c)return;document.getElementById("tip-modal-title").textContent="LinkedIn tip - "+c.prov;document.getElementById("tip-modal-body").innerHTML='<p style="font-size:13px;color:var(--muted);margin-bottom:12px">How to list this credential for maximum profile impact:</p><div class="tip-example">'+c.tip.replace(/\n/g,"<br>")+'</div><p style="font-size:12px;color:var(--muted);margin-top:12px">Credential: <strong style="color:var(--text)">'+c.cred+"</strong> - Verified: <strong style=\"color:var(--t1)\">"+c.vf+"</strong></p>";openModal("tip")}
+function dtAnswer(key,val,el){state.dtAnswers[key]=val;el.closest(".dt-opts").querySelectorAll(".dt-opt").forEach(function(o){o.classList.remove("selected")});el.classList.add("selected");setTimeout(dtNext,280)}
+function dtNext(){state.dtStep++;updateDTStep();if(state.dtStep===3)renderDTResults()}
+function dtBack(){if(state.dtStep===3){state.dtStep=0;state.dtAnswers={}}else if(state.dtStep>0)state.dtStep--;updateDTStep()}
+function updateDTStep(){document.querySelectorAll(".dt-step").forEach(function(s,i){s.classList.toggle("active",i===state.dtStep)});document.querySelectorAll(".dt-prog-dot").forEach(function(d,i){d.classList.toggle("done",i<state.dtStep);d.classList.toggle("active",i===state.dtStep)})}
+function renderDTResults(){
+  var role=state.dtAnswers.role,time=state.dtAnswers.time,goal=state.dtAnswers.goal;
+  var maxH=time==="2h"?2:time==="6h"?6:time==="12h"?12:999;
+  var scores={};COURSES.forEach(function(c){scores[c.id]=0});
+  COURSES.forEach(function(c){if(role&&c.rl.indexOf(role)>=0)scores[c.id]+=3;if(c.h<=maxH)scores[c.id]+=2;if(goal==="signal"&&c.tier===1)scores[c.id]+=3;if(goal==="upskill"&&c.diff==="python")scores[c.id]+=2;if(goal==="career"&&c.tier===3)scores[c.id]+=3;if(goal==="lead"&&(c.tp.indexOf("strategy")>=0||c.tier===3))scores[c.id]+=3;if(c.sprint)scores[c.id]+=1});
+  var recs=COURSES.filter(function(c){return!state.progress.has(c.id)}).sort(function(a,b){return scores[b.id]-scores[a.id]}).slice(0,5);
+  var reasons={signal:"Quick badge - strong LinkedIn signal.",upskill:"Technical depth for real skill building.",career:"Appears in job postings - high hiring signal.",lead:"Strategic AI focus for leadership roles.",default:"Best match for your background and time."};
+  document.getElementById("dt-results").innerHTML=recs.map(function(c,i){return'<div class="dt-rec"><div class="dt-rec-num">Recommendation '+(i+1)+'</div><div class="dt-rec-title">'+c.title+'</div><div class="dt-rec-reason">'+c.prov+" - "+c.h+"h - "+c.cred+" - "+(reasons[goal]||reasons.default)+'</div><a class="dt-rec-link" href="'+c.url+'" target="_blank">Open course</a></div>'}).join("")
+}
+function generateStudyPlan(){
+  var hpw=parseFloat(document.getElementById("sp-hours").value)||5;
+  var target=document.getElementById("sp-date").value;
+  if(!target){alert("Please set a target date.");return}
+  var weeks=Math.max(1,Math.ceil((new Date(target)-new Date())/(7*24*3600*1000)));
+  var incT1=document.getElementById("sp-t1").classList.contains("active");
+  var incT2=document.getElementById("sp-t2").classList.contains("active");
+  var incT3=document.getElementById("sp-t3").classList.contains("active");
+  var eligible=COURSES.filter(function(c){return!state.progress.has(c.id)&&((c.tier===1&&incT1)||(c.tier===2&&incT2)||(c.tier===3&&incT3))}).sort(function(a,b){if(a.sprint!==b.sprint)return a.sprint?-1:1;return a.tier-b.tier});
+  var plan=[],wk=1,wkH=0,wkC=[];
+  for(var i=0;i<eligible.length;i++){var c=eligible[i];if(wkH+c.h>hpw&&wkC.length){plan.push({wk:wk,courses:wkC});wk++;wkH=0;wkC=[]}if(c.h<=hpw){wkC.push(c);wkH+=c.h}if(wk>weeks)break}
+  if(wkC.length)plan.push({wk:wk,courses:wkC});
+  var html=plan.length===0?'<p style="color:var(--muted);font-size:12px">No courses match. Try more tiers or more hours.</p>':plan.map(function(p){return'<div class="week-row"><div class="week-label">Week '+p.wk+" - "+p.courses.reduce(function(s,c){return s+c.h},0).toFixed(1)+" hrs</div>"+p.courses.map(function(c){return'<div class="week-course">'+c.title+' <span>('+c.prov+" - "+c.h+"h)</span></div>"}).join("")+"</div>"}).join("");
+  document.getElementById("sp-result").innerHTML='<div class="modal-label" style="margin-top:12px">'+weeks+" weeks planned</div>"+html
+}
+function callClaude(prompt,max){
+  max=max||900;
+  return fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:max,messages:[{role:"user",content:prompt}]})}).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error&&d.error.message||"API error");return(d.content.find(function(b){return b.type==="text"})||{text:""}).text})})
+}
+function buildCourseList(){return COURSES.map(function(c){return c.id+"|"+c.title+"|"+c.prov+"|T"+c.tier+"|"+c.h+"h|"+c.diff+"|"+c.tp.join(",")}).join("\n")}
+function runCVMatcher(){
+  var cv=document.getElementById("cv-input").value.trim();
+  if(!cv){alert("Paste your CV first.");return}
+  var btn=document.getElementById("cv-btn");btn.disabled=true;btn.textContent="Analyzing...";
+  var result=document.getElementById("cv-result");result.innerHTML='<div class="ai-result loading">Analyzing your CV against all certificates...</div>';
+  var prompt="Analyze this CV and recommend the 5 best GenAI certificates from the list that address skill gaps or amplify strengths.\n\nCV:\n"+cv.slice(0,3000)+"\n\nCourses (id|title|provider|tier|hours|difficulty|topics):\n"+buildCourseList()+"\n\nReturn ONLY valid JSON with no markdown: {\"recommendations\":[{\"id\":\"...\",\"reason\":\"2-sentence reason\",\"priority\":1}],\"summary\":\"2-sentence strategy\"} Pick exactly 5.";
+  callClaude(prompt).then(function(text){
+    var data=JSON.parse(text.replace(/```json|```/g,"").trim());
+    state.highlighted.clear();data.recommendations.forEach(function(r){if(r.id)state.highlighted.add(r.id)});renderGrid();
+    result.innerHTML='<div class="ai-result"><p style="font-size:12px;color:var(--t2);margin-bottom:12px;font-family:var(--mono)">'+(data.summary||"")+"</p>"+data.recommendations.map(function(r){var c=COURSES.find(function(x){return x.id===r.id});return c?'<div class="result-item"><div class="result-title">#'+r.priority+" "+c.title+'</div><div class="result-reason">'+r.reason+'</div><a href="'+c.url+'" target="_blank" style="font-size:11px;color:var(--t1);font-family:var(--mono)">Open</a></div>':""}).join("")+"</div>"
+  }).catch(function(e){result.innerHTML='<div class="ai-result" style="color:var(--red)">Error: '+e.message+"</div>"}).then(function(){btn.disabled=false;btn.textContent="Analyze with Claude"})
+}
+function runJobAnalyzer(){
+  var jd=document.getElementById("job-input").value.trim();
+  if(!jd){alert("Paste a job description first.");return}
+  var btn=document.getElementById("job-btn");btn.disabled=true;btn.textContent="Analyzing...";
+  var result=document.getElementById("job-result");result.innerHTML='<div class="ai-result loading">Matching job requirements to certificates...</div>';
+  var prompt="Analyze this job description and identify matching GenAI certificates.\n\nJD:\n"+jd.slice(0,3000)+"\n\nCourses:\n"+buildCourseList()+"\n\nReturn ONLY valid JSON with no markdown: {\"matches\":[{\"id\":\"...\",\"relevance\":\"high\",\"reason\":\"1-sentence match\"}],\"key_skills\":[\"skill1\",\"skill2\"],\"strategy\":\"1 sentence\"} Include all high + top 3 medium relevance courses.";
+  callClaude(prompt).then(function(text){
+    var data=JSON.parse(text.replace(/```json|```/g,"").trim());
+    state.highlighted.clear();data.matches.filter(function(m){return m.relevance==="high"}).forEach(function(m){if(m.id)state.highlighted.add(m.id)});renderGrid();
+    result.innerHTML='<div class="ai-result">'+(data.key_skills?'<div style="margin-bottom:12px;font-size:11.5px;color:var(--muted)">Required skills: <strong style="color:var(--text)">'+data.key_skills.join(" - ")+"</strong></div>":"")+'<p style="font-size:12px;color:var(--t2);margin-bottom:12px;font-family:var(--mono)">'+(data.strategy||"")+"</p>"+data.matches.map(function(m){var c=COURSES.find(function(x){return x.id===m.id});var cls=m.relevance==="high"?"r-high":m.relevance==="medium"?"r-med":"r-low";return c?'<div class="result-item"><span class="result-badge '+cls+'">'+m.relevance+"</span> <strong>"+c.title+'</strong><div class="result-reason" style="margin-top:3px">'+m.reason+"</div></div>":""}).join("")+"</div>"
+  }).catch(function(e){result.innerHTML='<div class="ai-result" style="color:var(--red)">Error: '+e.message+"</div>"}).then(function(){btn.disabled=false;btn.textContent="Analyze with Claude"})
+}
+function runAutoRefresh(){
+  var btn=document.getElementById("refresh-btn");btn.disabled=true;btn.textContent="Verifying...";
+  var result=document.getElementById("refresh-result");result.innerHTML='<div class="ai-result loading">Reviewing course availability...</div>';
+  var freeCourses=COURSES.filter(function(c){return c.tier<3}).map(function(c){return c.id+"|"+c.title+"|"+c.prov+"|"+c.vf}).join("\n");
+  var prompt="Assess availability of these free GenAI courses. Flag any that may have changed since last verified (paywalled, discontinued, URL changed). Be conservative.\n\nCourses:\n"+freeCourses+"\n\nReturn ONLY valid JSON with no markdown: {\"confident\":[\"id1\"],\"uncertain\":[{\"id\":\"...\",\"concern\":\"brief concern\"}],\"notes\":\"1-2 sentence assessment\"}";
+  callClaude(prompt,600).then(function(text){
+    var data=JSON.parse(text.replace(/```json|```/g,"").trim());
+    state.flagged.clear();(data.uncertain||[]).forEach(function(u){if(u.id)state.flagged.add(u.id)});renderGrid();
+    var uH=(data.uncertain||[]).map(function(u){var c=COURSES.find(function(x){return x.id===u.id});return c?'<div class="result-item"><span class="result-badge r-low">uncertain</span> <strong>'+c.title+'</strong><div class="result-reason" style="margin-top:3px">'+u.concern+"</div></div>":""}).join("");
+    result.innerHTML='<div class="ai-result"><p style="color:var(--t2);font-size:12px;font-family:var(--mono);margin-bottom:12px">'+(data.notes||"")+'</p><p style="color:var(--green);font-size:12px;margin-bottom:12px">Confirmed: '+(data.confident||[]).length+" courses likely still available</p>"+uH+"</div>"
+  }).catch(function(e){result.innerHTML='<div class="ai-result" style="color:var(--red)">Error: '+e.message+"</div>"}).then(function(){btn.disabled=false;btn.textContent="Verify with Claude"})
+}
+function buildShareUrl(){var enc=[...state.progress].length>0?btoa(JSON.stringify([...state.progress])):"";var url=location.origin+location.pathname+(enc?"#p="+enc:"");document.getElementById("share-url-display").textContent=url;return url}
+function copyShareUrl(){var url=buildShareUrl();navigator.clipboard.writeText(url).then(function(){document.getElementById("copy-feedback").textContent="Copied to clipboard";setTimeout(function(){document.getElementById("copy-feedback").textContent=""},2500)}).catch(function(){document.getElementById("copy-feedback").textContent="Copy the URL above manually"})}
+setupChips("tier-chips","tier");setupChips("role-chips","role");setupChips("topic-chips","topic");
+loadProgress();renderGrid();
+</script>
+</body>
+</html>
